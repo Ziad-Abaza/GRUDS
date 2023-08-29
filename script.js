@@ -1,5 +1,5 @@
-
-// تعريف المتغيرات
+window.onload = ()=>{
+ // تعريف المتغيرات
 let title = document.getElementById('title');
 let price = document.getElementById('price');
 let Total_Quantity = document.getElementById('Total-Quantity');
@@ -152,4 +152,6 @@ function search(title) {
         // عرض البيانات المبحوث عنها
         document.getElementById('tbody').innerHTML = dataTable;
     }
+}
+
 }
