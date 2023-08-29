@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CARD</title>
+</head>
+<body>
+    <div class="crud">
+        <div class="head">
+            <h1>crud</h1>
+            <p>
+                product management
+            </p>
+        </div>
+        
+        <div class="inputs">
+            <input type="text" name="" id="title" placeholder="title">
+                <div class="price">
+                    <input type="number" name="" onkeyup="getTotal()" id="price" placeholder="price">
+                    <input type="number" name="" id="count" placeholder="count"  onkeyup="getTotal()">
+                    <input type="number" name="" id="Total-Quantity" placeholder="Total Quantity" readonly>
+                    <input type="number" name=""  onkeyup="getTotal()" id="discoint" placeholder="discoint">
+                    <small id="Total-Price"></small>
+                </div>
+            <input type="text" name="" id="category" placeholder="category">
+            <button id="btn-create" >create</button>
+        </div>
+
+        <div class="outputs">
+            <div class="search-block">
+                <input type="search" onkeyup="search(this.value)" id="search" placeholder="search">
+                <div class="btn-search">
+                    <button id="btn-search" onclick="GetSearch()">🔎</button>
+                </div>
+
+                <div id="deleteAll"></div>
+
+                <table>
+                    <tr>
+                        <th>id</th>
+                        <th>title</th>
+                        <th>category</th>
+                        <th>price</th>
+                        <th>count</th>
+                        <th>Total Quantity</th>
+                        <th>discount</th>
+                        <th>Total price</th>
+                        <th>update</th>
+                        <th>delete</th>
+                    </tr>
+
+                    <tbody id='tbody'></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
