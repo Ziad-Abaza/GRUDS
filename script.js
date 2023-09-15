@@ -1,4 +1,9 @@
+<<<<<<< HEAD
 // تعريف المتغيرات
+=======
+window.onload = ()=>{
+ // تعريف المتغيرات
+>>>>>>> 03fba7cf767cff720cc5b92c65b1ee87a5c3efa5
 let title = document.getElementById('title');
 let price = document.getElementById('price');
 let Total_Quantity = document.getElementById('Total-Quantity');
@@ -177,4 +182,6 @@ function GetSearch() {
     // عرض البيانات المبحوث عنها
     document.getElementById('tbody').innerHTML = dataTable;
     }
+}
+
 }
