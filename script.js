@@ -1,9 +1,8 @@
-window.onload = ()=>{
 // تعريف المتغيرات
 let title = document.getElementById('title');
 let price = document.getElementById('price');
 let Total_Quantity = document.getElementById('Total-Quantity');
-let discoint = document.getElementById('discoint');
+let discount = document.getElementById('discount');
 let Total_Price = document.getElementById('Total-Price');
 let count = document.getElementById('count');
 let category = document.getElementById('category');
@@ -11,16 +10,24 @@ let btn_create = document.getElementById('btn-create');
 let mood = 'create';
 let tmp;
 let search_title;
+console.log(title,price,Total_Price,Total_Quantity,discount,count,btn_create)
 
 // دالة لحساب الإجمالي
 function getTotal() {
     if (price.value !== '') {
         let result_product = +price.value * (+count.value);
-        let discoint_product = +discoint.value / 100;
-        let result = result_product - (result_product * discoint_product);
+        let discount_product = +discount.value / 100;
+        let result = result_product - (result_product * discount_product);
         Total_Quantity.value = result_product;
-        Total_Price.innerHTML = result;
+        Total_Price.innerText = result;
     }
+}
+
+let ArrData;
+if (localStorage.product != null) {
+    ArrData = JSON.parse(localStorage.product);
+} else {
+    ArrData = [];
 }
 
 // دالة إضافة منتج جديد أو تحديث منتج موجود
@@ -29,25 +36,29 @@ btn_create.onclick = function () {
         title: title.value,
         price: price.value,
         Total_Quantity: Total_Quantity.value,
-        discoint: discoint.value,
-        Total_Price: Total_Price.innerHTML,
+        discount: discount.value,
+        Total_Price: Total_Price.innerText,
         count: count.value,
         category: category.value
     };
-    if (mood === 'create') {
-        // إضافة منتج جديد
-        ArrData.push(data);
-        localStorage.setItem('product', JSON.stringify(ArrData));
-        readData();
-        clearData();
-    } else {
-        // تحديث منتج موجود
-        ArrData[tmp] = data;
-        localStorage.setItem('product', JSON.stringify(ArrData));
-        readData();
-        clearData();
-        mood = 'create';
-        btn_create.innerHTML = 'create';
+    if(title.value && price.value && category.value != ''){
+        if (mood === 'create') {
+            // إضافة منتج جديد
+            ArrData.push(data);
+            localStorage.setItem('product', JSON.stringify(ArrData));
+            readData();
+            clearData();
+        } else {
+            // تحديث منتج موجود
+            ArrData[tmp] = data;
+            localStorage.setItem('product', JSON.stringify(ArrData));
+            readData();
+            clearData();
+            mood = 'create';
+            btn_create.innerHTML = 'create';
+        }
+    }else{
+        alert('the value is NULL')
     }
 };
 
@@ -56,33 +67,40 @@ function clearData() {
     title.value = '';
     price.value = '';
     Total_Quantity.value = '';
-    discoint.value = '';
-    Total_Price.innerHTML = '';
+    discount.value = '';
+    Total_Price.innerText = '';
     count.value = '';
     category.value = '';
 }
 
 // قراءة البيانات من التخزين المحلي وعرضها
 function readData() {
-    let dataTable = [];
+    let dataTable = '';
 
     for (let i = 0; i < ArrData.length; i++) {
         dataTable += `
-            <tr>
-                <!-- تعبئة البيانات هنا -->
-            </tr>
-        `;
-    }
+        <tr>
+            <td>${i + 1}</td>
+            <td>${ArrData[i].title}</td>
+            <td>${ArrData[i].category}</td>
+            <td>${ArrData[i].price}</td>
+            <td>${ArrData[i].count}</td>
+            <td>${ArrData[i].Total_Quantity}</td>
+            <td>${ArrData[i].discount}%</td>
+            <td>${ArrData[i].Total_Price}</td>
+            <td><button id="btn-update" onclick="updateData(${i})">update</button></td>
+            <td><button id="btn-delete" onclick="deleteData(${i})">delete</button></td>
+        </tr>`;
+    };
 
     // عرض البيانات في الجدول
-    document.getElementById('tbody').innerHTML = dataTable;
+document.getElementById('tbody').innerHTML = dataTable;
 
-    // تحديث زر حذف الكل
-    let deleteAll = document.getElementById('deleteAll');
+// تحديث زر حذف الكل
+let deleteAll = document.getElementById('deleteAll');
     if (ArrData.length > 0) {
         deleteAll.innerHTML = `
-            <td><button id="btn-delete" onclick="deleteAll()" style="width:auto">DELETE All</button></td>
-        `;
+            <td><button id="btn-delete" onclick="deleteAllData()" style="width:auto">delete all</button></td>`;
     } else {
         deleteAll.innerHTML = '';
     }
@@ -99,9 +117,9 @@ function deleteData(id) {
 }
 
 // دالة حذف جميع المنتجات
-function deleteAll() {
-    ArrData.splice(0);
-    localStorage.clear();
+function deleteAllData() {
+    ArrData = [];
+    localStorage.removeItem('product');
     readData();
 }
 
@@ -111,8 +129,8 @@ function updateData(id) {
     title.value = ArrData[id].title;
     price.value = ArrData[id].price;
     Total_Quantity.value = ArrData[id].Total_Quantity;
-    discoint.value = ArrData[id].discoint;
-    Total_Price.innerHTML = ArrData[id].Total_Price;
+    discount.value = ArrData[id].discount;
+    Total_Price.innerText = ArrData[id].Total_Price;
     count.value = ArrData[id].count;
     category.value = ArrData[id].category;
 
@@ -136,21 +154,27 @@ function search(title) {
     search_title = title;
     GetSearch();
 
-    function GetSearch() {
-        let dataTable = [];
+function GetSearch() {
+    let dataTable = '';
 
-        for (let i = 0; i < ArrData.length; i++) {
-            if (ArrData[i].title.includes(search_title)) {
-                dataTable += `
-                    <tr>
-                        <!-- تعبئة البيانات هنا -->
-                    </tr>
-                `;
-            }
+    for (let i = 0; i < ArrData.length; i++) {
+        if (ArrData[i].title.includes(search_title)) {
+            dataTable += `
+            <tr>
+                <td>${i + 1}</td>
+                <td>${ArrData[i].title}</td>
+                <td>${ArrData[i].category}</td>
+                <td>${ArrData[i].price}</td>
+                <td>${ArrData[i].count}</td>
+                <td>${ArrData[i].Total_Quantity}</td>
+                <td>${ArrData[i].discount}%</td>
+                <td>${ArrData[i].Total_Price}</td>
+                <td><button id="btn-update" onclick="updateData(${i})">update</button></td>
+                <td><button id="btn-delete" onclick="deleteData(${i})">delete</button></td>
+            </tr>`;
         }
-
-        // عرض البيانات المبحوث عنها
-        document.getElementById('tbody').innerHTML = dataTable;
     }
-}
+    // عرض البيانات المبحوث عنها
+    document.getElementById('tbody').innerHTML = dataTable;
+    }
 }

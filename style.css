@@ -41,7 +41,7 @@
     --background-color-5: #a8b178; /* لون الخلفية 6 */
     --background-color-6: #4db08ae7; /* لون الخلفية 6 */
     --background-color-7: linear-gradient(to left, #2f7db8, #c42c87);; /* لون الخلفية 6 */
-    --box-shadow-1: 0 4px 8px #7342b8; /* ظل المربع 1 */
+    --box-shadow-1:0px 0px 8px -2px #932eb5; /* ظل المربع 1 */
     --box-shadow-2: 2px 2px 12px #183443; /* ظل المربع 2 */
     --box-shadow-3: 0 4px 8px #4CAF50; /* ظل المربع 3 */
     --box-shadow-4: 0 4px 8px #4c7daf; /* ظل المربع 3 */
@@ -272,6 +272,40 @@ table th{
     text-transform: uppercase;
 }
 th,td{
+    /* border-right: 2px solid #333333 ;
+    border-bottom: 2px solid #333333 ; */
     padding: 5px;
+    box-shadow: var(--box-shadow-1);
 }
-
+@media screen and (max-width: 820px) {
+    .scroll{
+        width: 90vh;
+        margin: auto;
+        overflow: scroll;
+    }
+    
+}
+@media screen and (max-width: 600px) {
+    .scroll{
+        width: 80vh;
+        margin: auto;
+        overflow: scroll;
+    }
+    
+}
+@media screen and (max-width: 500px) {
+    .scroll{
+        width: 70vh;
+        margin: auto;
+        overflow: scroll;
+    }
+    
+}
+@media screen and (max-width: 470px) {
+    .scroll{
+        width: 60vh;
+        margin: auto;
+        overflow: scroll;
+    }
+    
+}

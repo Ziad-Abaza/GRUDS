@@ -11,21 +11,21 @@
         <div class="head">
             <h1>crud</h1>
             <p>
-                product management
+                product management system
             </p>
         </div>
         
         <div class="inputs">
             <input type="text" name="" id="title" placeholder="title">
                 <div class="price">
-                    <input type="number" name="" onkeyup="getTotal()" id="price" placeholder="price">
-                    <input type="number" name="" id="count" placeholder="count"  onkeyup="getTotal()">
-                    <input type="number" name="" id="Total-Quantity" placeholder="Total Quantity" readonly>
-                    <input type="number" name=""  onkeyup="getTotal()" id="discoint" placeholder="discoint">
+                    <input type="number" onkeyup="getTotal()"  id="price" placeholder="price">
+                    <input type="number" onkeyup="getTotal()"  id="count" placeholder="count">
+                    <input type="number" id="Total-Quantity" placeholder="Total Quantity" readonly>
+                    <input type="number" onkeyup="getTotal()"  id="discount" placeholder="discount">
                     <small id="Total-Price"></small>
                 </div>
             <input type="text" name="" id="category" placeholder="category">
-            <button id="btn-create" >create</button>
+            <button type="submit" id="btn-create" >create</button>
         </div>
 
         <div class="outputs">
@@ -36,6 +36,7 @@
                 </div>
 
                 <div id="deleteAll"></div>
+            <div class="scroll">
 
                 <table>
                     <tr>
@@ -50,13 +51,13 @@
                         <th>update</th>
                         <th>delete</th>
                     </tr>
-
+                    
                     <tbody id='tbody'></tbody>
                 </table>
             </div>
+            </div>
         </div>
     </div>
-
     <script src="script.js"></script>
 </body>
 </html>
