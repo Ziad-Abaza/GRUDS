@@ -1,5 +1,4 @@
 
-window.onload = ()=>{
  // تعريف المتغيرات
 let title = document.getElementById('title');
 let price = document.getElementById('price');
@@ -181,4 +180,4 @@ function GetSearch() {
     }
 }
 
-}
+
