@@ -17,7 +17,7 @@
     --border-3: solid 2px #00c3ff; /* الحواف 3 */
     --border-4: solid 2px #4CAF50; /* الحواف 3 */
     --border-5: solid 2px #7342b8; /* الحواف 3 */
-    --border-6: solid 4px #375730; /* الحواف 3 */
+    --border-6: solid 2px #375730; /* الحواف 3 */
 
     --transition-duration-03: 0.3s; /* مدة الانتقال */
     --transition-duration-08: 0.8s; /* مدة الانتقال */
@@ -115,6 +115,7 @@ body{
 .crud{
     width: 80%;
     margin: auto;
+    min-width: 1000px;
 }
 
 .crud input{
@@ -266,46 +267,15 @@ table{
     width: 100%;
     text-align: center;
     margin: 10px 0;
+    table-layout: fixed;
+    min-width: 1000px;
 }
-
 table th{
     text-transform: uppercase;
 }
 th,td{
-    /* border-right: 2px solid #333333 ;
-    border-bottom: 2px solid #333333 ; */
+    width: 100%;
     padding: 5px;
-    box-shadow: var(--box-shadow-1);
+    border-bottom: var(--border-6);
 }
-@media screen and (max-width: 820px) {
-    .scroll{
-        width: 90vh;
-        margin: auto;
-        overflow: scroll;
-    }
-    
-}
-@media screen and (max-width: 600px) {
-    .scroll{
-        width: 80vh;
-        margin: auto;
-        overflow: scroll;
-    }
-    
-}
-@media screen and (max-width: 500px) {
-    .scroll{
-        width: 70vh;
-        margin: auto;
-        overflow: scroll;
-    }
-    
-}
-@media screen and (max-width: 470px) {
-    .scroll{
-        width: 60vh;
-        margin: auto;
-        overflow: scroll;
-    }
-    
-}
+
